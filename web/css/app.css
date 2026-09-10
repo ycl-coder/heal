@@ -1,18 +1,43 @@
+:root {
+  --bg: #f7f8fa;
+  --surface: #fffefb;
+  --ink: #2a2e33;
+  --ink-muted: #6b7280;
+  --mist: #5b7c99;
+  --mist-soft: #e8eef4;
+  --line: #d5dce3;
+  --danger: #a65d5d;
+  --radius: 6px;
+  --font-display: "Songti SC", "Noto Serif SC", "STSong", "SimSun", serif;
+  --font-body: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --content-width: 38rem;
+}
+
 body {
-  max-width: 40rem;
+  max-width: var(--content-width);
   margin: 0 auto;
-  padding: 1rem;
-  line-height: 1.6;
+  padding: 1.5rem 1.25rem 3rem;
+  line-height: 1.7;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background-color: var(--bg);
+  background-image: radial-gradient(
+    ellipse 80% 50% at 50% -10%,
+    var(--mist-soft),
+    transparent 70%
+  );
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 .storage-degraded-notice {
   margin: 0 0 1rem;
   padding: 0.6rem 0.75rem;
   font-size: 0.9rem;
-  color: #664;
-  background: #fff8e6;
-  border: 1px solid #e6d9a8;
-  border-radius: 0.25rem;
+  color: var(--ink-muted);
+  background: var(--mist-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
 }
 
 .storage-degraded-notice[hidden] {
@@ -41,13 +66,15 @@ body {
 
 .btn-primary {
   display: inline-block;
-  padding: 0.6rem 1.25rem;
   font-size: 1rem;
   cursor: pointer;
-  border: 1px solid #333;
-  border-radius: 0.25rem;
-  background: #333;
+  background: var(--mist);
+  border: 1px solid var(--mist);
+  border-color: var(--mist);
   color: #fff;
+  border-radius: var(--radius);
+  min-height: 2.75rem;
+  padding: 0.65rem 1.35rem;
 }
 
 .link-btn {
@@ -135,13 +162,14 @@ body {
 }
 
 .btn-secondary {
-  padding: 0.5rem 1rem;
   font: inherit;
   cursor: pointer;
-  border: 1px solid #333;
-  border-radius: 0.25rem;
-  background: #fff;
-  color: #333;
+  background: transparent;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  border-radius: var(--radius);
+  min-height: 2.75rem;
+  padding: 0.65rem 1.35rem;
 }
 
 .btn-primary:disabled {
@@ -340,11 +368,13 @@ body {
 }
 
 .btn-danger {
-  padding: 0.5rem 1rem;
   font: inherit;
   cursor: pointer;
-  border: 1px solid #a33;
-  border-radius: 0.25rem;
-  background: #fff;
-  color: #a33;
+  border: 1px solid var(--danger);
+  border-color: var(--danger);
+  color: var(--danger);
+  background: transparent;
+  border-radius: var(--radius);
+  min-height: 2.75rem;
+  padding: 0.65rem 1.35rem;
 }
