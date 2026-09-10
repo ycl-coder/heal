@@ -71,3 +71,61 @@ body {
   background: none;
   border: none;
 }
+
+.write-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+}
+
+.write-label {
+  display: block;
+  margin: 0.75rem 0 0.25rem;
+  font-weight: 500;
+}
+
+.write-field {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  font: inherit;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+.write-body {
+  min-height: 12rem;
+  resize: vertical;
+}
+
+.prompt-text {
+  margin: 0.75rem 0;
+  padding: 0.75rem;
+  background: #f7f7f7;
+  border-radius: 0.25rem;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.prompt-text p {
+  margin: 0.25rem 0;
+}
+
+.write-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 1.25rem;
+}
+
+.btn-secondary {
+  padding: 0.5rem 1rem;
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid #333;
+  border-radius: 0.25rem;
+  background: #fff;
+  color: #333;
+}

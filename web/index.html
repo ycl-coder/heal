@@ -32,7 +32,26 @@
         </a>
       </p>
     </section>
-    <section id="view-write" class="view" hidden></section>
+    <section id="view-write" class="view" hidden>
+      <h2 class="write-title">写信</h2>
+      <label class="write-label" for="scene">场景</label>
+      <select id="scene" class="write-field">
+        <option value="分手">分手</option>
+        <option value="单恋">单恋</option>
+        <option value="不得不分开">不得不分开</option>
+        <option value="其他">其他</option>
+      </select>
+      <div id="prompt-text" class="prompt-text" aria-live="polite"></div>
+      <label class="write-label" for="title">标题（可选）</label>
+      <input type="text" id="title" class="write-field" maxlength="200" />
+      <label class="write-label" for="body">正文</label>
+      <textarea id="body" class="write-field write-body" rows="12"></textarea>
+      <div class="write-actions">
+        <button type="button" id="btn-save-draft" class="btn-secondary">保存草稿</button>
+        <button type="button" id="btn-go-seal" class="btn-primary">去封存</button>
+        <button type="button" id="btn-back-entry" class="link-btn">返回入口</button>
+      </div>
+    </section>
     <section id="view-seal" class="view" hidden></section>
     <section id="view-archive" class="view" hidden></section>
   </main>
