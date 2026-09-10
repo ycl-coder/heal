@@ -129,3 +129,91 @@ body {
   background: #fff;
   color: #333;
 }
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.seal-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+}
+
+.seal-summary p {
+  margin: 0.35rem 0;
+}
+
+.seal-preview {
+  margin: 1rem 0;
+  padding: 0.75rem;
+  background: #f7f7f7;
+  border-radius: 0.25rem;
+}
+
+.seal-preview-body {
+  margin-top: 0.75rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 0.95rem;
+  color: #444;
+  max-height: 12rem;
+  overflow-y: auto;
+}
+
+.seal-confirm-label {
+  display: block;
+  margin: 1rem 0;
+  cursor: pointer;
+}
+
+.seal-confirm-label input {
+  margin-right: 0.5rem;
+}
+
+.seal-nocontact {
+  margin: 1rem 0;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+}
+
+.seal-nocontact legend {
+  font-size: 0.9rem;
+  padding: 0 0.25rem;
+}
+
+.seal-nocontact-option {
+  display: block;
+  margin: 0.35rem 0;
+  cursor: pointer;
+}
+
+.seal-nocontact-option input {
+  margin-right: 0.5rem;
+}
+
+.seal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 1.25rem;
+}
+
+.seal-success-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+}
+
+.seal-boundary {
+  margin: 0 0 1rem;
+  color: #444;
+}
+
+.seal-aid {
+  margin: 0 0 1.25rem;
+  font-size: 0.9rem;
+}

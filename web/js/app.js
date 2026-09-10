@@ -13,6 +13,7 @@ const PROMPTS = {
 const ACTIVE_ID_KEY = "activeLetterId";
 const AUTOSAVE_MS = 400;
 const DEFAULT_SCENE = "分手";
+const MS_PER_DAY = 86400000;
 
 /** @type {Awaited<ReturnType<typeof openStorage>>|null} */
 let store = null;
@@ -94,6 +95,64 @@ function scheduleAutosave() {
   }, AUTOSAVE_MS);
 }
 
+function resetSealView() {
+  document.getElementById("seal-confirm").hidden = false;
+  document.getElementById("seal-success").hidden = true;
+}
+
+function populateSealSummary(letter) {
+  const titleEl = document.getElementById("seal-summary-title");
+  titleEl.textContent = letter.title.trim() || "（无标题）";
+  document.getElementById("seal-summary-scene").textContent = letter.scene;
+  document.getElementById("seal-summary-count").textContent = String(letter.body.length);
+  document.getElementById("seal-preview-body").textContent = letter.body;
+  document.getElementById("seal-confirm-check").checked = false;
+  document.getElementById("btn-confirm-seal").disabled = true;
+  const noneRadio = document.querySelector('input[name="noContactDays"][value=""]');
+  if (noneRadio) {
+    noneRadio.checked = true;
+  }
+}
+
+function getNoContactUntil() {
+  const selected = document.querySelector('input[name="noContactDays"]:checked');
+  if (!selected || !selected.value) {
+    return null;
+  }
+  const days = Number(selected.value);
+  return Date.now() + days * MS_PER_DAY;
+}
+
+async function enterSealView() {
+  resetSealView();
+  if (!activeLetter) {
+    await enterWriteView();
+    return;
+  }
+  await persistDraft();
+  activeLetter = {
+    ...activeLetter,
+    ...collectFormData(),
+  };
+  populateSealSummary(activeLetter);
+  showView("seal");
+}
+
+async function confirmSeal() {
+  if (!activeLetter || !store) {
+    return;
+  }
+  const noContactUntil = getNoContactUntil();
+  activeLetter = await store.seal(activeLetter.id, { noContactUntil });
+  document.getElementById("seal-confirm").hidden = true;
+  document.getElementById("seal-success").hidden = false;
+}
+
+function clearActiveLetterSession() {
+  sessionStorage.removeItem(ACTIVE_ID_KEY);
+  activeLetter = null;
+}
+
 async function enterWriteView() {
   await initStore();
   const id = getActiveLetterId();
@@ -160,9 +219,30 @@ document.getElementById("btn-go-seal").addEventListener("click", () => {
         alert("请先写下正文");
         return;
       }
-      showView("seal");
+      return enterSealView();
     })
     .catch((err) => console.error("go seal failed", err));
+});
+
+document.getElementById("seal-confirm-check").addEventListener("change", (event) => {
+  document.getElementById("btn-confirm-seal").disabled = !event.target.checked;
+});
+
+document.getElementById("btn-confirm-seal").addEventListener("click", () => {
+  confirmSeal().catch((err) => console.error("seal failed", err));
+});
+
+document.getElementById("btn-back-write").addEventListener("click", () => {
+  showView("write");
+});
+
+document.getElementById("btn-seal-go-archive").addEventListener("click", () => {
+  showView("archive");
+});
+
+document.getElementById("btn-seal-write-another").addEventListener("click", () => {
+  clearActiveLetterSession();
+  enterWriteView().catch((err) => console.error("write another failed", err));
 });
 
 document.getElementById("btn-back-entry").addEventListener("click", () => {

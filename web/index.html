@@ -52,7 +52,60 @@
         <button type="button" id="btn-back-entry" class="link-btn">返回入口</button>
       </div>
     </section>
-    <section id="view-seal" class="view" hidden></section>
+    <section id="view-seal" class="view" hidden>
+      <h2 class="seal-title">封存仪式</h2>
+      <div id="seal-confirm">
+        <div class="seal-summary">
+          <p><strong>标题：</strong><span id="seal-summary-title">—</span></p>
+          <p><strong>场景：</strong><span id="seal-summary-scene"></span></p>
+          <p><strong>字数：</strong><span id="seal-summary-count"></span></p>
+        </div>
+        <details class="seal-preview">
+          <summary>预览正文</summary>
+          <div id="seal-preview-body" class="seal-preview-body"></div>
+        </details>
+        <label class="seal-confirm-label">
+          <input type="checkbox" id="seal-confirm-check" />
+          我确认将此信安放在本机，无法通过本产品发送给对方
+        </label>
+        <fieldset class="seal-nocontact">
+          <legend>可选：不再联系标记（仅本机日期，无推送提醒）</legend>
+          <label class="seal-nocontact-option">
+            <input type="radio" name="noContactDays" value="" checked />
+            不设置
+          </label>
+          <label class="seal-nocontact-option">
+            <input type="radio" name="noContactDays" value="7" />
+            7 天
+          </label>
+          <label class="seal-nocontact-option">
+            <input type="radio" name="noContactDays" value="14" />
+            14 天
+          </label>
+          <label class="seal-nocontact-option">
+            <input type="radio" name="noContactDays" value="30" />
+            30 天
+          </label>
+        </fieldset>
+        <div class="seal-actions">
+          <button type="button" id="btn-confirm-seal" class="btn-primary" disabled>确认封存</button>
+          <button type="button" id="btn-back-write" class="btn-secondary">返回修改</button>
+        </div>
+      </div>
+      <div id="seal-success" hidden>
+        <h2 class="seal-success-title">已安放</h2>
+        <p class="seal-boundary">本产品不是心理治疗，也不是挽回关系的工具。</p>
+        <p class="seal-aid">
+          <a href="https://www.crisis.org.cn/" target="_blank" rel="noopener noreferrer">
+            心理援助资源（非本产品危机干预）
+          </a>
+        </p>
+        <div class="seal-actions">
+          <button type="button" id="btn-seal-go-archive" class="btn-primary">查看归档</button>
+          <button type="button" id="btn-seal-write-another" class="btn-secondary">再写一封</button>
+        </div>
+      </div>
+    </section>
     <section id="view-archive" class="view" hidden></section>
   </main>
   <footer class="site-footer">
