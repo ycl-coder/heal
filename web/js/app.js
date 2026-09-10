@@ -161,9 +161,19 @@ async function deleteSelectedArchiveLetter() {
   await enterArchiveView();
 }
 
+function showStorageDegradedNotice() {
+  const noticeEl = document.getElementById("storage-degraded-notice");
+  if (noticeEl) {
+    noticeEl.hidden = false;
+  }
+}
+
 async function initStore() {
   if (!store) {
     store = await openStorage();
+    if (store.isDegraded) {
+      showStorageDegradedNotice();
+    }
   }
   return store;
 }
@@ -277,6 +287,7 @@ async function confirmSeal() {
   }
   const noContactUntil = getNoContactUntil();
   activeLetter = await store.seal(activeLetter.id, { noContactUntil });
+  clearActiveLetterSession();
   document.getElementById("seal-confirm").hidden = true;
   document.getElementById("seal-success").hidden = false;
 }
@@ -294,11 +305,8 @@ async function enterWriteView() {
   if (id) {
     const letter = await store.get(id);
     if (letter?.status === "sealed") {
-      alert("此信已封存，无法编辑");
-      await enterArchiveView();
-      return;
-    }
-    if (letter) {
+      clearActiveLetterSession();
+    } else if (letter) {
       activeLetter = letter;
     }
   }

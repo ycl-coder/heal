@@ -231,11 +231,32 @@ function createStore(backend) {
 /**
  * openStorage opens letter storage using the given backend or browser defaults.
  * @param {{ getAll: () => Promise<Letter[]>, put: (letter: Letter) => Promise<void>, delete: (id: string) => Promise<void> }} [backend]
+ * @returns {Promise<ReturnType<typeof createStore> & { backendName: string, isDegraded: boolean }>}
  */
 export async function openStorage(backend) {
-  const resolved = backend ?? (await tryOpenIndexedDB()) ?? tryOpenLocalStorage();
+  let backendName = "indexeddb";
+  let isDegraded = false;
+  let resolved = backend;
+
+  if (!resolved) {
+    resolved = await tryOpenIndexedDB();
+    if (!resolved) {
+      resolved = tryOpenLocalStorage();
+      if (resolved) {
+        backendName = "localStorage";
+        isDegraded = true;
+      }
+    }
+  } else {
+    backendName = "memory";
+  }
+
   if (!resolved) {
     throw new Error("no storage backend available");
   }
-  return createStore(resolved);
+
+  const store = createStore(resolved);
+  store.backendName = backendName;
+  store.isDegraded = isDegraded;
+  return store;
 }
