@@ -1,4 +1,4 @@
-export const BAIDU_SITE_ID = "YOUR_BAIDU_SITE_ID";
+export const BAIDU_SITE_ID = "17688037a04ed39e073435846288b8b5";
 
 export function isAnalyticsConfigured(id = BAIDU_SITE_ID) {
   return Boolean(id) && id !== "YOUR_BAIDU_SITE_ID";
