@@ -48,20 +48,38 @@ body {
   display: none;
 }
 
+body:has(#view-entry:not([hidden])) .site-header {
+  display: none;
+}
+
+.brand-hero {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 8vw, 3.25rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  margin: 2.5rem 0 1.25rem;
+  color: var(--ink);
+}
+
 .entry-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin: 0 0 1.25rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 4vw, 1.5rem);
+  font-weight: 400;
+  margin: 0 0 1rem;
+  line-height: 1.45;
 }
 
-.entry-privacy ul {
-  margin: 0.25rem 0 0;
-  padding-left: 1.25rem;
+.entry-lede {
+  color: var(--ink-muted);
+  margin: 0 0 1rem;
+  max-width: 28rem;
 }
 
-.entry-boundary {
-  margin: 1.25rem 0;
-  color: #444;
+.entry-privacy-quiet {
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+  margin: 0 0 2rem;
+  padding-left: 1.1rem;
 }
 
 .btn-primary {
@@ -80,7 +98,7 @@ body {
 .link-btn {
   padding: 0;
   font: inherit;
-  color: inherit;
+  color: var(--mist);
   text-decoration: underline;
   cursor: pointer;
   background: none;
@@ -89,11 +107,6 @@ body {
 
 .entry-nav {
   margin: 1rem 0 0;
-}
-
-.entry-aid {
-  margin: 1.5rem 0 0;
-  font-size: 0.9rem;
 }
 
 .site-footer {
