@@ -1,4 +1,5 @@
 import { initAnalytics } from "./analytics.js";
+import { playSealMotion } from "./seal-motion.js";
 import { openStorage } from "./storage.js";
 
 initAnalytics();
@@ -240,7 +241,11 @@ function scheduleAutosave() {
 
 function resetSealView() {
   document.getElementById("seal-confirm").hidden = false;
-  document.getElementById("seal-success").hidden = true;
+  const success = document.getElementById("seal-success");
+  success.hidden = true;
+  success.classList.remove("is-visible");
+  const stage = document.getElementById("seal-motion-stage");
+  stage.classList.remove("is-sealing", "is-sealed");
 }
 
 function populateSealSummary(letter) {
@@ -288,8 +293,12 @@ async function confirmSeal() {
   const noContactUntil = getNoContactUntil();
   activeLetter = await store.seal(activeLetter.id, { noContactUntil });
   clearActiveLetterSession();
+  const stage = document.getElementById("seal-motion-stage");
+  await playSealMotion(stage);
   document.getElementById("seal-confirm").hidden = true;
-  document.getElementById("seal-success").hidden = false;
+  const success = document.getElementById("seal-success");
+  success.hidden = false;
+  success.classList.add("is-visible");
 }
 
 function clearActiveLetterSession() {

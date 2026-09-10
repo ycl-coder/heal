@@ -54,15 +54,17 @@
     <section id="view-seal" class="view" hidden>
       <h2 class="seal-title">封存仪式</h2>
       <div id="seal-confirm">
-        <div class="seal-summary">
-          <p><strong>标题：</strong><span id="seal-summary-title">—</span></p>
-          <p><strong>场景：</strong><span id="seal-summary-scene"></span></p>
-          <p><strong>字数：</strong><span id="seal-summary-count"></span></p>
+        <div id="seal-motion-stage" class="seal-motion-stage">
+          <div class="seal-summary">
+            <p><strong>标题：</strong><span id="seal-summary-title">—</span></p>
+            <p><strong>场景：</strong><span id="seal-summary-scene"></span></p>
+            <p><strong>字数：</strong><span id="seal-summary-count"></span></p>
+          </div>
+          <details class="seal-preview">
+            <summary>预览正文</summary>
+            <div id="seal-preview-body" class="seal-preview-body"></div>
+          </details>
         </div>
-        <details class="seal-preview">
-          <summary>预览正文</summary>
-          <div id="seal-preview-body" class="seal-preview-body"></div>
-        </details>
         <label class="seal-confirm-label">
           <input type="checkbox" id="seal-confirm-check" />
           我确认将此信安放在本机，无法通过本产品发送给对方
