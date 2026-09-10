@@ -95,17 +95,17 @@ Letter {
 ### 3.1 目录
 
 ```text
-web/
-  index.html
-  css/app.css
-  js/
-    app.js         # 段切换与封存流程
-    storage.js     # IndexedDB（降级 localStorage）
-    analytics.js   # 百度统计（站点 ID 配置）
-  README.md        # 本地 http 预览与静态托管说明
+index.html           # 仓库根目录（便于 GitHub Pages）
+css/app.css
+js/
+  app.js             # 段切换与封存流程
+  storage.js         # IndexedDB（降级 localStorage）
+  analytics.js       # 百度统计（站点 ID 配置）
+README.md            # 本地预览与 Pages 托管说明
+package.json         # "type": "module"（Node 单测）
 ```
 
-可部署至任意静态托管（GitHub Pages、OSS、Nginx 等）。
+可部署至任意静态托管。GitHub Pages：Settings → Pages → Deploy from a branch → `/ (root)`。
 
 ### 3.2 百度统计站点 ID 如何获取
 
