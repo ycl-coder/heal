@@ -1,6 +1,6 @@
 # heal web
 
-本地静态站点，无需构建工具。
+本地静态站点，无需构建工具。UI 主题为「清晨留白」：浅色大留白、细线分隔、雾蓝点缀，衬线标题 + 无框架纯静态页。
 
 ## 本地预览
 
@@ -17,7 +17,7 @@ cd web && python3 -m http.server 8080
 在项目根目录运行：
 
 ```bash
-node --test web/js/storage.test.mjs web/js/analytics.test.mjs
+node --test web/js/storage.test.mjs web/js/analytics.test.mjs web/js/seal-motion.test.mjs
 ```
 
 覆盖：草稿→封存只读、列表与删除、百度占位 ID 不注入脚本、真实形态 ID 注入 `hm.js` 且 URL 不含正文。

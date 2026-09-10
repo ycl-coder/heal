@@ -110,9 +110,10 @@ body:has(#view-entry:not([hidden])) .site-header {
 }
 
 .site-footer {
-  margin-top: 2rem;
+  border-top: 1px solid var(--line);
+  color: var(--ink-muted);
+  margin-top: 3rem;
   padding-top: 1rem;
-  border-top: 1px solid #ddd;
   font-size: 0.9rem;
 }
 
@@ -210,7 +211,7 @@ body:has(#view-entry:not([hidden])) .site-header {
 .seal-title {
   font-family: var(--font-display);
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: 400;
   margin: 0 0 1rem;
 }
 
@@ -334,8 +335,9 @@ body:has(#view-entry:not([hidden])) .site-header {
 }
 
 .archive-title {
+  font-family: var(--font-display);
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: 400;
   margin: 0 0 1rem;
 }
 
@@ -367,13 +369,13 @@ body:has(#view-entry:not([hidden])) .site-header {
   font: inherit;
   text-align: left;
   cursor: pointer;
-  border: 1px solid #ddd;
-  border-radius: 0.25rem;
-  background: #fff;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: var(--radius);
 }
 
 .archive-item-btn:hover {
-  background: #f7f7f7;
+  background: var(--mist-soft);
 }
 
 .archive-item-title {
@@ -422,10 +424,11 @@ body:has(#view-entry:not([hidden])) .site-header {
   padding: 0.75rem;
   white-space: pre-wrap;
   word-break: break-word;
-  background: #f7f7f7;
-  border-radius: 0.25rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
   font-size: 0.95rem;
-  color: #444;
+  color: var(--ink);
 }
 
 .archive-actions {
