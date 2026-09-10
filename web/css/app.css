@@ -217,3 +217,120 @@ body {
   margin: 0 0 1.25rem;
   font-size: 0.9rem;
 }
+
+.archive-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+}
+
+.archive-empty {
+  margin: 1.5rem 0;
+  text-align: center;
+  color: #444;
+}
+
+.archive-empty p {
+  margin: 0 0 1rem;
+}
+
+.archive-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.archive-item {
+  margin: 0 0 0.5rem;
+}
+
+.archive-item-btn {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.75rem;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  background: #fff;
+}
+
+.archive-item-btn:hover {
+  background: #f7f7f7;
+}
+
+.archive-item-title {
+  display: block;
+  font-weight: 500;
+}
+
+.archive-item-meta {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.archive-drafts {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+}
+
+.archive-drafts-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+}
+
+.archive-detail-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+}
+
+.archive-detail-meta {
+  margin: 0.35rem 0;
+  font-size: 0.95rem;
+}
+
+.archive-detail-nocontact {
+  margin: 0.35rem 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.archive-detail-body {
+  margin: 1rem 0;
+  padding: 0.75rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: #f7f7f7;
+  border-radius: 0.25rem;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.archive-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 1.25rem;
+}
+
+.archive-nav {
+  margin: 1.5rem 0 0;
+}
+
+.btn-danger {
+  padding: 0.5rem 1rem;
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid #a33;
+  border-radius: 0.25rem;
+  background: #fff;
+  color: #a33;
+}

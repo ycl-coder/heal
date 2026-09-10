@@ -106,7 +106,36 @@
         </div>
       </div>
     </section>
-    <section id="view-archive" class="view" hidden></section>
+    <section id="view-archive" class="view" hidden>
+      <h2 class="archive-title">本机已安放</h2>
+      <div id="archive-empty" class="archive-empty" hidden>
+        <p>还没有安放的信</p>
+        <button type="button" id="btn-archive-write" class="btn-primary">去写信</button>
+      </div>
+      <div id="archive-list-view">
+        <ul id="archive-sealed-list" class="archive-list"></ul>
+        <div id="archive-drafts-section" class="archive-drafts" hidden>
+          <h3 class="archive-drafts-title">未完成</h3>
+          <ul id="archive-draft-list" class="archive-list"></ul>
+        </div>
+      </div>
+      <article id="archive-detail" class="archive-detail" hidden>
+        <h3 id="archive-detail-title" class="archive-detail-title"></h3>
+        <p class="archive-detail-meta"><strong>场景：</strong><span id="archive-detail-scene"></span></p>
+        <p class="archive-detail-meta"><strong>安放日期：</strong><span id="archive-detail-date"></span></p>
+        <p id="archive-detail-nocontact" class="archive-detail-nocontact" hidden>
+          <strong>不再联系标记至：</strong><span id="archive-detail-nocontact-date"></span>
+        </p>
+        <div id="archive-detail-body" class="archive-detail-body"></div>
+        <div class="archive-actions">
+          <button type="button" id="btn-archive-back" class="btn-secondary">返回列表</button>
+          <button type="button" id="btn-archive-delete" class="btn-danger">删除</button>
+        </div>
+      </article>
+      <p class="archive-nav">
+        <button type="button" id="btn-archive-back-entry" class="link-btn">返回入口</button>
+      </p>
+    </section>
   </main>
   <footer class="site-footer">
     <a id="feedback-mailto" href="mailto:yincuilong@126.com?subject=heal%20%E6%84%8F%E8%A7%81%E5%8F%8D%E9%A6%88">意见反馈</a>

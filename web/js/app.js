@@ -28,6 +28,139 @@ export function showView(name) {
   }
 }
 
+/** @type {string|null} */
+let selectedArchiveId = null;
+
+function formatDisplayDate(timestamp) {
+  return new Date(timestamp).toLocaleDateString("zh-CN", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+function displayTitle(letter) {
+  return letter.title.trim() || "（无标题）";
+}
+
+function createArchiveListItem(letter, onSelect) {
+  const li = document.createElement("li");
+  li.className = "archive-item";
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "archive-item-btn";
+  btn.dataset.id = letter.id;
+  const title = document.createElement("span");
+  title.className = "archive-item-title";
+  title.textContent = displayTitle(letter);
+  const meta = document.createElement("span");
+  meta.className = "archive-item-meta";
+  if (letter.status === "sealed") {
+    meta.textContent = `${letter.scene} · ${formatDisplayDate(letter.sealedAt ?? letter.createdAt)}`;
+  } else {
+    meta.textContent = `${letter.scene} · 草稿`;
+  }
+  btn.append(title, meta);
+  btn.addEventListener("click", () => {
+    onSelect(letter.id);
+  });
+  li.append(btn);
+  return li;
+}
+
+function renderArchiveList(letters) {
+  const sealed = letters.filter((item) => item.status === "sealed");
+  const drafts = letters.filter((item) => item.status === "draft");
+  const emptyEl = document.getElementById("archive-empty");
+  const listViewEl = document.getElementById("archive-list-view");
+  const sealedListEl = document.getElementById("archive-sealed-list");
+  const draftsSectionEl = document.getElementById("archive-drafts-section");
+  const draftListEl = document.getElementById("archive-draft-list");
+  const isEmpty = sealed.length === 0 && drafts.length === 0;
+
+  emptyEl.hidden = !isEmpty;
+  listViewEl.hidden = isEmpty;
+  sealedListEl.replaceChildren();
+  draftListEl.replaceChildren();
+
+  for (const letter of sealed) {
+    sealedListEl.append(createArchiveListItem(letter, openArchiveDetail));
+  }
+
+  draftsSectionEl.hidden = drafts.length === 0;
+  for (const letter of drafts) {
+    draftListEl.append(createArchiveListItem(letter, continueDraftFromArchive));
+  }
+}
+
+function showArchiveListMode() {
+  selectedArchiveId = null;
+  document.getElementById("archive-list-view").hidden = false;
+  document.getElementById("archive-empty").hidden =
+    document.getElementById("archive-sealed-list").children.length === 0 &&
+    document.getElementById("archive-draft-list").children.length === 0;
+  document.getElementById("archive-detail").hidden = true;
+}
+
+function populateArchiveDetail(letter) {
+  document.getElementById("archive-detail-title").textContent = displayTitle(letter);
+  document.getElementById("archive-detail-scene").textContent = letter.scene;
+  document.getElementById("archive-detail-date").textContent = formatDisplayDate(
+    letter.sealedAt ?? letter.createdAt,
+  );
+  const noContactEl = document.getElementById("archive-detail-nocontact");
+  if (letter.noContactUntil) {
+    noContactEl.hidden = false;
+    document.getElementById("archive-detail-nocontact-date").textContent = formatDisplayDate(
+      letter.noContactUntil,
+    );
+  } else {
+    noContactEl.hidden = true;
+  }
+  document.getElementById("archive-detail-body").textContent = letter.body;
+}
+
+async function openArchiveDetail(id) {
+  await initStore();
+  const letter = await store.get(id);
+  if (!letter || letter.status !== "sealed") {
+    return;
+  }
+  selectedArchiveId = id;
+  populateArchiveDetail(letter);
+  document.getElementById("archive-list-view").hidden = true;
+  document.getElementById("archive-empty").hidden = true;
+  document.getElementById("archive-detail").hidden = false;
+}
+
+async function continueDraftFromArchive(id) {
+  setActiveLetterId(id);
+  await enterWriteView();
+}
+
+async function enterArchiveView() {
+  await initStore();
+  showArchiveListMode();
+  const letters = await store.list();
+  renderArchiveList(letters);
+  showView("archive");
+}
+
+async function deleteSelectedArchiveLetter() {
+  if (!selectedArchiveId || !store) {
+    return;
+  }
+  const confirmed = window.confirm("确定删除这封信？删除后无法恢复。");
+  if (!confirmed) {
+    return;
+  }
+  await store.remove(selectedArchiveId);
+  if (sessionStorage.getItem(ACTIVE_ID_KEY) === selectedArchiveId) {
+    clearActiveLetterSession();
+  }
+  await enterArchiveView();
+}
+
 async function initStore() {
   if (!store) {
     store = await openStorage();
@@ -162,7 +295,7 @@ async function enterWriteView() {
     const letter = await store.get(id);
     if (letter?.status === "sealed") {
       alert("此信已封存，无法编辑");
-      showView("archive");
+      await enterArchiveView();
       return;
     }
     if (letter) {
@@ -194,7 +327,7 @@ document.getElementById("btn-start-write").addEventListener("click", () => {
 });
 
 document.getElementById("btn-go-archive").addEventListener("click", () => {
-  showView("archive");
+  enterArchiveView().catch((err) => console.error("enter archive failed", err));
 });
 
 document.getElementById("scene").addEventListener("change", () => {
@@ -237,7 +370,23 @@ document.getElementById("btn-back-write").addEventListener("click", () => {
 });
 
 document.getElementById("btn-seal-go-archive").addEventListener("click", () => {
-  showView("archive");
+  enterArchiveView().catch((err) => console.error("enter archive failed", err));
+});
+
+document.getElementById("btn-archive-write").addEventListener("click", () => {
+  enterWriteView().catch((err) => console.error("enter write failed", err));
+});
+
+document.getElementById("btn-archive-back").addEventListener("click", () => {
+  showArchiveListMode();
+});
+
+document.getElementById("btn-archive-delete").addEventListener("click", () => {
+  deleteSelectedArchiveLetter().catch((err) => console.error("delete archive failed", err));
+});
+
+document.getElementById("btn-archive-back-entry").addEventListener("click", () => {
+  showView("entry");
 });
 
 document.getElementById("btn-seal-write-another").addEventListener("click", () => {
