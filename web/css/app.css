@@ -126,9 +126,18 @@ body:has(#view-entry:not([hidden])) .site-header {
   border: none;
 }
 
+.letter-sheet {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.35rem 1.75rem;
+  box-shadow: 0 1px 0 rgba(42, 46, 51, 0.04);
+}
+
 .write-title {
+  font-family: var(--font-display);
+  font-weight: 400;
   font-size: 1.25rem;
-  font-weight: 600;
   margin: 0 0 1rem;
 }
 
@@ -144,22 +153,30 @@ body:has(#view-entry:not([hidden])) .site-header {
   box-sizing: border-box;
   padding: 0.5rem;
   font: inherit;
-  border: 1px solid #ccc;
-  border-radius: 0.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--ink);
+}
+
+.write-field:focus {
+  outline: 2px solid var(--mist-soft);
+  border-color: var(--mist);
 }
 
 .write-body {
-  min-height: 12rem;
+  min-height: 14rem;
   resize: vertical;
 }
 
 .prompt-text {
   margin: 0.75rem 0;
   padding: 0.75rem;
-  background: #f7f7f7;
-  border-radius: 0.25rem;
+  background: var(--mist-soft);
+  border-left: 3px solid var(--mist);
+  border-radius: 0 var(--radius) var(--radius) 0;
   font-size: 0.95rem;
-  color: #444;
+  color: var(--ink-muted);
 }
 
 .prompt-text p {
