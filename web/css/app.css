@@ -8,3 +8,66 @@ body {
 .view[hidden] {
   display: none;
 }
+
+.entry-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 1.25rem;
+}
+
+.entry-privacy ul {
+  margin: 0.25rem 0 0;
+  padding-left: 1.25rem;
+}
+
+.entry-boundary {
+  margin: 1.25rem 0;
+  color: #444;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 0.6rem 1.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 1px solid #333;
+  border-radius: 0.25rem;
+  background: #333;
+  color: #fff;
+}
+
+.link-btn {
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.entry-nav {
+  margin: 1rem 0 0;
+}
+
+.entry-aid {
+  margin: 1.5rem 0 0;
+  font-size: 0.9rem;
+}
+
+.site-footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+  font-size: 0.9rem;
+}
+
+#copy-email {
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
